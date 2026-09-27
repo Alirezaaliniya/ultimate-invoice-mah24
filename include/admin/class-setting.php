@@ -1398,6 +1398,17 @@ add_filter("woocommerce_get_settings_pages", function ($pages) {
                         'C10'       => _x("C Series: C10", "wc-setting", "pepro-ultimate-invoice"),
                       ),
                     ),
+                    'puiw_slip_layout' => array(
+                      'name'     => _x("Shipping Slip Layout", "wc-setting", "pepro-ultimate-invoice"),
+                      'id'       => 'puiw_slip_layout',
+                      'type'     => 'radio',
+                      'default'  => 'default',
+                      'options' =>
+                      array(
+                        'default' => _x("Active template's default slip", "wc-setting", "pepro-ultimate-invoice"),
+                        'postal'  => _x("Postal label (sender & receiver stacked, logo and order info on side)", "wc-setting", "pepro-ultimate-invoice"),
+                      ),
+                    ),
                     'puiw_pdf_orientation' => array(
                       'name'     => _x("PDF Page Orientation ", "wc-setting", "pepro-ultimate-invoice"),
                       'id'       => 'puiw_pdf_orientation',

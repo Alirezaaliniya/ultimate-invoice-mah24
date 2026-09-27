@@ -849,6 +849,19 @@ if (!class_exists("PeproUltimateInvoice_Template")) {
       return apply_filters("puiw_pdf_size_slip", $pdf_size, $default);
     }
     /**
+     * Get shipping slip layout (default: active template's slip / postal: postal label layout)
+     *
+     * @method PeproUltimateInvoice_Template->get_slip_layout()
+     * @param string $default default layout
+     * @return string slip layout
+     */
+    public function get_slip_layout($default="default")
+    {
+      $slip_layout = get_option("puiw_slip_layout",$default);
+      $slip_layout = empty($slip_layout) ? $default : $slip_layout;
+      return apply_filters("puiw_get_slip_layout", $slip_layout, $default);
+    }
+    /**
      * Get Pdf orientation
      *
      * @method PeproUltimateInvoice_Template->get_pdf_orientation()

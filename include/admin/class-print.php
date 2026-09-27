@@ -1332,6 +1332,11 @@ if (!class_exists("PeproUltimateInvoice_Print")) {
       $opt["CURENT_DIR_URL"] = apply_filters("puiw_get_template_dir_url",   plugin_dir_url($opt["template"]), $opt["template"], $order);
       $keepOriginalHTMLtags  = $this->get_preserve_html_tags($opt, $order);
       $keepOriginalENnumbers = $this->get_preserve_english_numbers($opt, $order);
+      if ("postal" == $this->fn->get_slip_layout()) {
+        $templateDirpath          = apply_filters("puiw_get_postal_slip_dir_path", PEPROULTIMATEINVOICE_DIR . "/template/slips-postal", $order);
+        $opt["SLIP_ASSETS_URL"]   = PEPROULTIMATEINVOICE_URL . "/template/default-rtl";
+        $keepOriginalENnumbers[]  = "SLIP_ASSETS_URL";
+      }
       do_action("puiw_printslips_before_create_html", $opt, $opts, $order);
       $extrainvoiceheaddata  = '';
       $main_css_style        = file_get_contents("$templateDirpath/style.slips" . ("PDF" == $MODE || "CSS" == $MODE ? ".pdf" : "") . ".css");
@@ -2097,11 +2102,11 @@ if (!class_exists("PeproUltimateInvoice_Print")) {
      * @license https://pepro.dev/license Pepro.dev License
      */
     private function get_item_meta($item_id, $item, $product) {
+      if (!$item || empty($item)) return '';
+      // capture everything third-party itemmeta hooks echo, so nothing leaks into the page output
       ob_start();
-      $ob_get_contents = "";
       $echo = "";
       $found_any = false;
-      if (!$item || empty($item)) return '';
       $hidden_order_itemmeta = apply_filters('woocommerce_hidden_order_itemmeta', array('_qty', '_tax_class', '_product_id', '_variation_id', '_line_subtotal', '_line_subtotal_tax', '_line_total', '_line_tax', 'method_id', 'cost', '_reduced_stock',));
 
       do_action('woocommerce_before_order_itemmeta', $item_id, $item, $product);
@@ -2127,13 +2132,11 @@ if (!class_exists("PeproUltimateInvoice_Print")) {
         if ($found_any) {
           echo "$echo</div></div>";
         }
-        $ob_get_contents = ob_get_contents();
-        ob_end_clean();
       }
 
       do_action('woocommerce_after_order_itemmeta', $item_id, $item, $product);
 
-      return $ob_get_contents;
+      return ob_get_clean();
     }
     /**
      * WPC Product Bundles Hide Bundles Parent

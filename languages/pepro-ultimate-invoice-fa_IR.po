@@ -3195,3 +3195,15 @@ msgstr "https://pepro.dev/"
 #~ "[country], [province], [city], [address1], [address2]. Postcode: ([po_box])"
 #~ msgstr ""
 #~ "[country]، [province]، [city]، [address1]، [address2]. کد پستی: ([po_box])"
+
+msgctxt "wc-setting"
+msgid "Shipping Slip Layout"
+msgstr "قالب برچسب پستی"
+
+msgctxt "wc-setting"
+msgid "Active template's default slip"
+msgstr "برچسب پیش‌فرض قالب فعال"
+
+msgctxt "wc-setting"
+msgid "Postal label (sender & receiver stacked, logo and order info on side)"
+msgstr "برچسب پستی (فرستنده و گیرنده زیر هم، لوگو و اطلاعات سفارش در کنار)"

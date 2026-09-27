@@ -1,0 +1,81 @@
+/* Postal label layout (mPDF) — sender & receiver stacked, logo & order info on the side.
+ * mPDF has poor support for bordered blocks inside tables, so every box is a table cell. */
+body, p, span, div, td, th {
+	direction: rtl;
+	font-size: {{{font_size}}};
+}
+
+div.pl-frame {
+	border: 1.2mm solid #555555;
+	padding: 1mm;
+}
+
+table.pl-wrap {
+	width: 100%;
+	border-collapse: collapse;
+}
+
+td.pl-main {
+	width: 66%;
+	vertical-align: top;
+	padding: 2mm 2mm 2mm 1mm;
+}
+
+td.pl-side {
+	width: 34%;
+	vertical-align: top;
+	padding: 2mm 1mm 2mm 2mm;
+}
+
+table.pl-stack {
+	width: 100%;
+	border-collapse: collapse;
+}
+
+td.pl-box {
+	border: 0.4mm solid #333333;
+	padding: 3mm 4mm;
+	vertical-align: top;
+	text-align: right;
+	line-height: 1.9;
+}
+
+td.pl-gap {
+	height: 2mm;
+	padding: 0;
+	border: none;
+}
+
+td.pl-cell {
+	border: 0.4mm solid #333333;
+	padding: 3mm;
+	vertical-align: middle;
+	text-align: right;
+	line-height: 1.9;
+}
+
+td.pl-logo {
+	text-align: center;
+}
+
+td.pl-box p,
+td.pl-cell p {
+	margin: 0 0 2.5mm;
+	padding: 0;
+	line-height: 1.9;
+}
+
+p.pl-title {
+	font-size: 1.6em;
+	font-weight: bold;
+	margin-bottom: 2mm;
+}
+
+div.pl-barcode {
+	padding-top: 1.5mm;
+}
+
+div.pl-note {
+	font-size: 0.9em;
+	color: #444444;
+}
