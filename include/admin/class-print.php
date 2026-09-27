@@ -1183,6 +1183,17 @@ if (!class_exists("PeproUltimateInvoice_Print")) {
       $templateDirpath         = apply_filters("puiw_get_template_dir_path", $template, $order);
       $contents                = file_get_contents("$templateDirpath/default.cfg");
       $template_pdf_setting    = $this->parseTemplate($contents);
+      if ("postal" == $this->fn->get_slip_layout()) {
+        // postal label has no header/footer, so drop the invoice template's reserved space
+        $template_pdf_setting = apply_filters("puiw_postal_slip_pdf_margins", array_merge($template_pdf_setting, array(
+          "pdf_margin_top"    => 5,
+          "pdf_margin_right"  => 5,
+          "pdf_margin_bottom" => 5,
+          "pdf_margin_left"   => 5,
+          "pdf_margin_header" => 0,
+          "pdf_margin_footer" => 0,
+        )), $order);
+      }
       $get_allow_pdf_customer  = $this->fn->get_allow_pdf_customer();
       $get_pdf_size            = $this->fn->get_pdf_size_slip() . ("L" == $this->fn->get_pdf_orientation() ? "-L" : "");
       $_fontData               = $fontData + [
